@@ -22,12 +22,21 @@
 </head>
 
 <body>
-    <div id="divRefreshNote" style="margin:5px;"></div>
-    <input id="btnRefresh" type="button" value='Refresh' />
-    <div id="map" style="height:60vh; margin-top:5px;"></div>
+	<div id="prompt" style="visibility:visible">
+	    <div style="margin:5px;">Enter super secret password:</div>
+	    <input id="txtPrompt" />
+	    <button id="btnPrompt">Magic</button>
+	</div>
+
+	<div id="content" style="visibility:hidden">
+	    <div id="divRefreshNote" style="margin:5px;"></div>
+	    <input id="btnRefresh" type="button" value='Refresh' />
+	    <div id="map" style="height:60vh; margin-top:5px;"></div>
+	</div>
 </body>
 
 
+<script src="main.js"></script>
 <script src="buildTable.js"></script>
 <script src="setupCesium.js"></script>
 <script src="dataLoader.js"></script>
