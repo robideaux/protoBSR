@@ -1,7 +1,7 @@
-var myUrl = "https://script.google.com/macros/s/AKfycbxIw-74yPSw2whrwVLfcZrMz-isu2a0jWArhpvBzShjsRmgPGjB4OqrGnPCFPbA4XKk/exec"
+var locationsUrl = "https://script.google.com/macros/s/AKfycbxIw-74yPSw2whrwVLfcZrMz-isu2a0jWArhpvBzShjsRmgPGjB4OqrGnPCFPbA4XKk/exec"
 
-function fetchData(path, callback) {
-    fetch(myUrl)
+function fetchData(magic, callback) {
+    fetch(locationsUrl + "/" + magic)
         .then(res => res.json())
         .then(data => {
             console.log(data)
