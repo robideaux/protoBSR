@@ -1,4 +1,4 @@
-var body = document.getElementsByTagName("body")[0]
+var body = document.getElementById("tables")
 var table = document.createElement("table")
 var thead = document.createElement("thead")
 var trow  = document.createElement("tr")
