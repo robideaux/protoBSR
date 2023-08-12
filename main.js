@@ -10,6 +10,8 @@ var runnerDictionary = {}
 var divPrompt = document.getElementById("prompt")
 var divContent = document.getElementById("content")
 var btnPrompt = document.getElementById("btnPrompt").addEventListener("click", onMagic)
+divPrompt.hidden = false
+divContent.hidden = true
 
 function onMagic() {
     var txtPrompt = document.getElementById("txtPrompt")
@@ -20,13 +22,13 @@ function onMagic() {
 
 function onData(data) {
 	secondsUntilRefresh = refreshInterval
-    if (data.result != null) {
+	if (data.result != null) {
 		isFetching = false
-        divPrompt.hidden = false
-        divContent.hidden = true
-        return
-    }
-    
+		divPrompt.hidden = false
+		divContent.hidden = true
+		return
+	}
+
     divPrompt.hidden = true
     divContent.hidden = false
 	try {
