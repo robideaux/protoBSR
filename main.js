@@ -76,7 +76,7 @@ function updateStats(data) {
 function onFetch() {
 	if (isFetching == false) {
         isFetching = true
-        fetchData(magicWord, onData)
+        fetchDataAsync(magicWord, onData)
 	}
 }
 
