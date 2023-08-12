@@ -18,7 +18,7 @@ function fetchData(magic, callback) {
 }
 
 async function fetchDataAsync(magic, callback) {
-    var path = locationsUrl + "/" + magic
+    var path = locationsUrl + "?magic=" + magic
     var response = await fetch(path)
 
     if (!response.ok) {
