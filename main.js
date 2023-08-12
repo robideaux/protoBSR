@@ -1,10 +1,11 @@
-const execLocationUrl = "https://script.google.com/macros/s/AKfycbxIw-74yPSw2whrwVLfcZrMz-isu2a0jWArhpvBzShjsRmgPGjB4OqrGnPCFPbA4XKk/exec"
-const devLocationUrl = "https://script.google.com/macros/s/AKfycbyzd82_Ynp_xdyQTdjOK3a6Z-HJ1vkVpNTAXsoeHrg/dev"
+// const execLocationUrl = "https://script.google.com/macros/s/AKfycbxIw-74yPSw2whrwVLfcZrMz-isu2a0jWArhpvBzShjsRmgPGjB4OqrGnPCFPbA4XKk/exec"
+// const devLocationUrl = "https://script.google.com/macros/s/AKfycbyzd82_Ynp_xdyQTdjOK3a6Z-HJ1vkVpNTAXsoeHrg/dev"
 const refreshInterval = 60
+var magicWord
 var secondsUntilRefresh = refreshInterval
 var isFetching = false
 var runnerDictionary = {}
-var locationUrl = ""
+// var locationUrl = ""
 
 var divPrompt = document.getElementById("prompt")
 var divContent = document.getElementById("content")
@@ -12,8 +13,8 @@ var btnPrompt = document.getElementById("btnPrompt").addEventListener("click", o
 
 function onMagic() {
     var txtPrompt = document.getElementById("txtPrompt")
-    var magicWord = txtPrompt.value
-    locationUrl = execLocationUrl + "/" + magicWord
+    magicWord = txtPrompt.value
+    // locationUrl = execLocationUrl + "/" + magicWord
     onFetch()
 }
 
@@ -73,9 +74,9 @@ function updateStats(data) {
 }
 
 function onFetch() {
-    if (isFetching == false) {
+	if (isFetching == false) {
         isFetching = true
-        fetchData(locationUrl, onData)
+        fetchData(magicWord, onData)
 	}
 }
 
