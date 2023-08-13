@@ -99,7 +99,8 @@ function updateCircles() {
 
 		beacon.circle.setStyle({
 			color: outlineColor,
-            fillColor: fillColor
+			stroke: shouldOutline,
+			fillColor: fillColor
 		})
 	})
 }
