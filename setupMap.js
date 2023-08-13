@@ -1,17 +1,11 @@
 var map = L.map('_map')
 map.setView([30.25, -92.0], 13)
 
-/*
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 })
-osm.addTo(map)
-*/
-var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
-	maxZoom: 16
-})
-Esri_NatGeoWorldMap.addTo(map)
+OpenStreetMap_Mapnik.addTo(map)
 
 var newColor = "lime"
 var medColor = "yellow"
