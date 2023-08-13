@@ -64,16 +64,16 @@ function populateMap(participantData) {
 								   '<b>Max Range : </b>' + stats.maxRange + '<br/>' +
 								   '<b>Age : </b>' + stats.age + '<br/>')
 				circle.addTo(beaconLayers)
-                beaconLayers.addLayer(circle)
+				beaconLayers.addLayer(circle)
 
 				lastBeacons.push({
 					updateTime: stats.updateTime,
 					circle: circle
 				})
-            })
-        }
-    }
-	liveUpdates = setInterval(updateCircles, 100);
+			})
+		}
+	}
+	liveUpdates = setInterval(updateCircles, 100)
 }
 
 function updateCircles() {
@@ -87,11 +87,11 @@ function updateCircles() {
 			fillColor = newColor
 			shouldFill = true
 			shouldOutline = false
-		} else if (stats.age <= 120) {
+		} else if (age <= 120) {
 			fillColor = medColor
 			shouldFill = true
 			shouldOutline = false
-		} else if (stats.age <= 180) {
+		} else if (age <= 180) {
 			fillColor = oldColor
 			shouldFill = true
 			shouldOutline = false
