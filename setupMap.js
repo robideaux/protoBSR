@@ -1,8 +1,11 @@
-const map = L.map('_map')
+var map = L.map('_map')
 map.setView([30.25, -92.0], 13)
 
-// replace "toner" here with "terrain" or "watercolor"
-var layer = new L.StamenTileLayer("terrain")
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+})
+osm.addTo(map)
+
 var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 	apikey: '<your apikey>',
