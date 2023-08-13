@@ -48,7 +48,6 @@ function populateMap(participantData) {
                     fillOpacity: 0.4,
                     radius: stats.accuracy*2.0
                   }).addTo(beaconLayers)
-                }
 
                 /*
                 description : '<b>Bib : </b>' + stats.bib + '<br/>' +
