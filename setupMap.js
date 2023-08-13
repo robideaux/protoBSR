@@ -56,7 +56,6 @@ function populateMap(participantData) {
                     radius: stats.maxRange + stats.accuracy
 				})
 				circle.bindTooltip('<b>Bib : </b>' + stats.bib + '<br/>' +
-								   '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
 								   '<b>Latitude : </b>' + stats.lat + '<br/>' +
 								   '<b>Longitude : </b>' + stats.lon + '<br/>' +
 								   '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
