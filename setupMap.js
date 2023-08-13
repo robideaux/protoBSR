@@ -49,7 +49,16 @@ function populateMap(participantData) {
                     fillColor: fillColor,
                     fillOpacity: 0.4,
                     radius: stats.accuracy*2.0
-                  }).addTo(beaconLayers)
+                  })
+				circle.bindTooltip('<b>Bib : </b>' + stats.bib + '<br/>' +
+								   '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
+								   '<b>Latitude : </b>' + stats.lat + '<br/>' +
+								   '<b>Longitude : </b>' + stats.lon + '<br/>' +
+								   '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
+								   '<b>Min Range : </b>' + stats.minRange + '<br/>' +
+								   '<b>Max Range : </b>' + stats.maxRange + '<br/>' +
+								   '<b>Age : </b>' + stats.age + '<br/>')
+				circle.addTo(beaconLayers)
 
                 /*
                 description : '<b>Bib : </b>' + stats.bib + '<br/>' +
