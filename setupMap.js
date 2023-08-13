@@ -97,7 +97,7 @@ function updateCircles() {
 			shouldOutline = false
 		}
 
-		circle.setStyle({
+		beacon.circle.setStyle({
 			color: outlineColor,
             fillColor: fillColor
 		})
