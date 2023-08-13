@@ -4,30 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Runner Tracker</title>
-	<!--
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-	-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@latest/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@latest/dist/leaflet.js"></script>
-	
-	<!--
-	<script src="https://cesium.com/downloads/cesiumjs/releases/1.98/Build/Cesium/Cesium.js"></script>	
-	<style>
-		@import url(https://cesium.com/downloads/cesiumjs/releases/1.98/Build/Cesium/Widgets/widgets.css);
-		body {
-			background-color: dimgray;
-			color: aliceblue;
-			font-family: monospace;
-			margin: 0;
-			padding: 0;
-		}
-		td {
-			padding-left: 20px;
-		}
-		#cesiumContainer {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
-	</style>
-	-->
 </head>
 
 <body>
@@ -46,143 +24,9 @@
 </body>
 
 
-<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
 <script src="main.js"></script>
 <script src="buildTable.js"></script>
-<!--
-<script src="setupCesium.js"></script>
--->
 <script src="setupMap.js"></script>
 <script src="dataLoader.js"></script>
-
-<!--
-<script lang="text/javascript">
-  const refreshInterval = 60
-  var secondsUntilRefresh = refreshInterval
-  var isFetching = false
-  var runnerDictionary = {}
- 
-  function onData(data) {
-	secondsUntilRefresh = refreshInterval
-	try {
-		updateStats(data)
-		populateTable(runnerDictionary)
-		populateMap(runnerDictionary)
-	}
-	catch (err) {
-		console.error(err)
-	}
-	finally{
-		isFetching = false
-	}
-  }
-
-  function updateStats(data) {
-	if (data) {
-        var runners = Object.keys(data)
-		if (runners.length > 0) {
-			runners.forEach(function(runner) {
-				var stats = data[runner]
-				var cache = runnerDictionary[runner]
-				if (cache == null)
-				{
-					cache = stats
-					cache.updateTime = Date.now()
-					runnerDictionary[runner] = cache
-				}
-				else if (cache.capturedTime != stats.capturedTime) {
-					cache = stats
-					cache.updateTime = Date.now()
-					runnerDictionary[runner] = cache
-				}
-		  })
-		}
-	}
-
-	if (runnerDictionary) {
-        var runners = Object.keys(runnerDictionary)
-		runners.forEach(function(runner) {
-			var cache = runnerDictionary[runner]
-			cache.age = (Date.now() - cache.updateTime) / 1000.0
-		})
-	}
-  }
-
-
-/*
-  function refreshMap() {
-	secondsUntilRefresh = refreshInterval;
-	var rows = document.getElementById("runner_rows");
-	rows.innerHTML = "";
-
-	var runnerDataSource = new Cesium.CustomDataSource("runners");
-
-	// Get available project info as a web service call
-	fetch(locationsUrl, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'text/plain;charset=utf-8',
-		}
-		}).then(results => {
-//	$.get(locationsUrl, function (results) {
-		var data = JSON.parse(results);
-		if (data) {
-		  var runners = Object.keys(data);
-		  if (data.errorMessage) {
-			  rows.innerHTML = "<tr><td>Error: " + data.errorMessage + "</td></tr>";
-		  } else if (runners.length > 0) {
-			runners.forEach(function(runner) {
-				var stats = data[runner];
-				rows.innerHTML += "<tr>" + "<td>" + runner + "</td>" +
-					"<td>" + stats.bib + "</td>" +
-					"<td>" + stats.lat + "</td>" +
-					"<td>" + stats.lon + "</td>" +
-					"<td>" + stats.accuracy + "</td>" +
-					"</tr>";
-			});
-			viewer.dataSources.removeAll(true);
-			viewer.dataSources.add(runnerDataSource);
-		  } else {
-			rows.innerHTML = "<tr><td>No runner information returned.</td></tr>";
-		  }
-		} else {
-		  rows.innerHTML = "<tr><td>No results returned from query.</td></tr>";
-	  }
-	}).catch(err => {
-	  viewer.dataSources.removeAll(true);
-	  console.log("No results returned?");
-	  secondsUntilRefresh = 5;
-	});
-  };
-*/  
-
-  function onFetch() {
-	if (isFetching == false) {
-			isFetching = true
-			fetchData(onData)
-		}
-  }
-
-  // Refresh countdown display
-  var interval = setInterval(function() {
-	if (secondsUntilRefresh <= 0){
-		onFetch()
-		return
-	}
-	var percent = (secondsUntilRefresh / refreshInterval) * 100.0;
-	var barHeight = 5;
-	var roundedSec = Math.round(secondsUntilRefresh);
-	var message = "Map refreshes in " + roundedSec + " seconds.";
-	if (roundedSec == 1){
-	  var message = "Map refreshes in " + roundedSec + " second.";
-	}
-	document.getElementById("divRefreshNote").innerHTML =
-"<p><small style=\"padding:10px;\">" + message + "</small></p><div style=\"height:" + barHeight + "px; border-radius:10px; background-color:lightgreen; width:" + percent + "%;\"></div>";
-	secondsUntilRefresh = secondsUntilRefresh - 0.1;
-  }, 100);
-  
-	document.getElementById("btnRefresh").addEventListener("click", onFetch);
-</script>
--->
 
 </html>
