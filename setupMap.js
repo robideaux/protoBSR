@@ -50,8 +50,9 @@ function populateMap(participantData) {
 				var location = L.latLng(stats.lat, stats.lon)
 				map.setView(location)
 				var circle = L.circle(location, {
-					color: outlineColor,
 					stroke: shouldOutline,
+					color: outlineColor,
+					fill: shouldFill,
 					fillColor: fillColor,
 					fillOpacity: 0.4,
 					radius: stats.maxRange + stats.accuracy
@@ -82,7 +83,8 @@ function updateCircles() {
 		var outlineColor = "blue"
 		var shouldFill = false
 		var shouldOutline = true
-		var age = Date.now() - beacon.updateTime
+		var age = (Date.now() - beacon.updateTime) / 1000.0
+		
 		if (age <= 60) {
 			fillColor = newColor
 			shouldFill = true
@@ -98,8 +100,9 @@ function updateCircles() {
 		}
 
 		beacon.circle.setStyle({
-			color: outlineColor,
 			stroke: shouldOutline,
+			color: outlineColor,
+			fill: shouldFill,
 			fillColor: fillColor
 		})
 	})
