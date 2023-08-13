@@ -11,12 +11,17 @@ var newColor = "lime"
 var medColor = "yellow"
 var oldColor = "red"
 
+var lastBeacons = []
+var liveUpdates = null
+
 var beaconLayers = L.layerGroup()
 beaconLayers.clearLayers()
 beaconLayers.addTo(map)
 
 function populateMap(participantData) {
+	clearInterval(liveUpdates)
     beaconLayers.clearLayers()
+	lastBeacons = []
 
     if (participantData) {
         var runners = Object.keys(participantData)
@@ -44,12 +49,12 @@ function populateMap(participantData) {
 
                 var location = L.latLng(stats.lat, stats.lon)
                 map.setView(location)
-                var circle = L.circle(location, {
-                    color: outlineColor,
+				var circle = L.circle(location, {
+					color: outlineColor,
                     fillColor: fillColor,
                     fillOpacity: 0.4,
-                    radius: stats.accuracy*2.0
-                  })
+                    radius: stats.maxRange + stats.accuracy
+				})
 				circle.bindTooltip('<b>Bib : </b>' + stats.bib + '<br/>' +
 								   '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
 								   '<b>Latitude : </b>' + stats.lat + '<br/>' +
@@ -59,20 +64,42 @@ function populateMap(participantData) {
 								   '<b>Max Range : </b>' + stats.maxRange + '<br/>' +
 								   '<b>Age : </b>' + stats.age + '<br/>')
 				circle.addTo(beaconLayers)
-
-                /*
-                description : '<b>Bib : </b>' + stats.bib + '<br/>' +
-                              '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
-                              '<b>Latitude : </b>' + stats.lat + '<br/>' +
-                              '<b>Longitude : </b>' + stats.lon + '<br/>' +
-                              '<b>Accuracy : </b>' + stats.accuracy + '<br/>' +
-                              '<b>Min Range : </b>' + stats.minRange + '<br/>' +
-                              '<b>Max Range : </b>' + stats.maxRange + '<br/>' +
-                              '<b>Age : </b>' + stats.age + '<br/>',
-                */
-
                 beaconLayers.addLayer(circle)
+
+				lastBeacons.push({
+					updateTime: stats.updateTime,
+					circle: circle
+				})
             })
         }
     }
+	liveUpdates = setInterval(updateCircles, 100);
+}
+
+function updateCircles() {
+	lastBeacons.forEach(function(beacon) {
+		var fillColor = oldColor
+		var outlineColor = "blue"
+		var shouldFill = false
+		var shouldOutline = true
+		var age = Date.now() - beacon.updateTime
+		if (age <= 60) {
+			fillColor = newColor
+            shouldFill = true
+            shouldOutline = false
+        } else if (stats.age <= 120) {
+			fillColor = medColor
+            shouldFill = true
+            shouldOutline = false
+        } else if (stats.age <= 180) {
+			fillColor = oldColor
+            shouldFill = true
+            shouldOutline = false
+		}
+
+		circle.setStyle({
+			color: outlineColor,
+            fillColor: fillColor
+		})
+	})
 }
