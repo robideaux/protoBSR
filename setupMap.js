@@ -3,7 +3,12 @@ map.setView([30.25, -92.0], 13)
 
 // replace "toner" here with "terrain" or "watercolor"
 var layer = new L.StamenTileLayer("terrain")
-map.addLayer(layer)
+var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	apikey: '<your apikey>',
+	maxZoom: 22
+});
+map.addLayer(Thunderforest_TransportDark)
 
 var newColor = "lime"
 var medColor = "yello"
