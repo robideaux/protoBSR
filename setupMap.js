@@ -20,40 +20,41 @@ beaconLayers.addTo(map)
 
 function populateMap(participantData) {
 	clearInterval(liveUpdates)
-    beaconLayers.clearLayers()
+	beaconLayers.clearLayers()
 	lastBeacons = []
 
-    if (participantData) {
-        var runners = Object.keys(participantData)
-        if (runners.length > 0) {
-            runners.forEach(function(runner) {
-                var stats = participantData[runner]
-                var fillColor = oldColor
-                var outlineColor = "blue"
-                var shouldFill = false
-                var shouldOutline = true
+	if (participantData) {
+		var runners = Object.keys(participantData)
+		if (runners.length > 0) {
+			runners.forEach(function(runner) {
+				var stats = participantData[runner]
+				var fillColor = oldColor
+				var outlineColor = "blue"
+				var shouldFill = false
+				var shouldOutline = true
 
-                if (stats.age <= 60) {
-                    fillColor = newColor
-                    shouldFill = true
-                    shouldOutline = false
-                } else if (stats.age <= 120){
-                    fillColor = medColor
-                    shouldFill = true
-                    shouldOutline = false
-                } else if (stats.age <= 180){
-                    fillColor = oldColor
-                    shouldFill = true
-                    shouldOutline = false
-                }
+				if (stats.age <= 60) {
+					fillColor = newColor
+					shouldFill = true
+					shouldOutline = false
+				} else if (stats.age <= 120) {
+					fillColor = medColor
+					shouldFill = true
+					shouldOutline = false
+				} else if (stats.age <= 180) {
+					fillColor = oldColor
+					shouldFill = true
+					shouldOutline = false
+				}
 
-                var location = L.latLng(stats.lat, stats.lon)
-                map.setView(location)
+				var location = L.latLng(stats.lat, stats.lon)
+				map.setView(location)
 				var circle = L.circle(location, {
 					color: outlineColor,
-                    fillColor: fillColor,
-                    fillOpacity: 0.4,
-                    radius: stats.maxRange + stats.accuracy
+					stroke: shouldOutline,
+					fillColor: fillColor,
+					fillOpacity: 0.4,
+					radius: stats.maxRange + stats.accuracy
 				})
 				circle.bindTooltip('<b>Bib : </b>' + stats.bib + '<br/>' +
 								   '<b>Latitude : </b>' + stats.lat + '<br/>' +
@@ -84,16 +85,16 @@ function updateCircles() {
 		var age = Date.now() - beacon.updateTime
 		if (age <= 60) {
 			fillColor = newColor
-            shouldFill = true
-            shouldOutline = false
-        } else if (stats.age <= 120) {
+			shouldFill = true
+			shouldOutline = false
+		} else if (stats.age <= 120) {
 			fillColor = medColor
-            shouldFill = true
-            shouldOutline = false
-        } else if (stats.age <= 180) {
+			shouldFill = true
+			shouldOutline = false
+		} else if (stats.age <= 180) {
 			fillColor = oldColor
-            shouldFill = true
-            shouldOutline = false
+			shouldFill = true
+			shouldOutline = false
 		}
 
 		circle.setStyle({
