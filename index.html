@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Runner Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<!--
 	<script src="https://cesium.com/downloads/cesiumjs/releases/1.98/Build/Cesium/Cesium.js"></script>	
 	<style>
 		@import url(https://cesium.com/downloads/cesiumjs/releases/1.98/Build/Cesium/Widgets/widgets.css);
@@ -19,6 +22,7 @@
 		}
 		#cesiumContainer {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 	</style>
+	-->
 </head>
 
 <body>
@@ -39,8 +43,12 @@
 
 <script src="main.js"></script>
 <script src="buildTable.js"></script>
+<!--
 <script src="setupCesium.js"></script>
+-->
+<script src="setupMap.js"></script>
 <script src="dataLoader.js"></script>
+<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js?v1.3.0"></script>
 
 <script lang="text/javascript">
   const refreshInterval = 60
