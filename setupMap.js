@@ -8,7 +8,7 @@ var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.co
 	apikey: '<your apikey>',
 	maxZoom: 22
 });
-map.addLayer(Thunderforest_TransportDark)
+Thunderforest_TransportDark.addTo(map)
 
 var newColor = "lime"
 var medColor = "yello"
